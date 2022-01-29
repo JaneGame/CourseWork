@@ -31,7 +31,6 @@ public class Pay {
         name.setValue(info.getName());
         cvv.setValue(info.getCvv());
         button.click();
-        goodAuth.shouldBe(visible, Duration.ofSeconds(15));
 
 
     }
@@ -43,7 +42,7 @@ public class Pay {
         name.setValue(info.getName());
         cvv.setValue(info.getCvv());
         button.click();
-        errorAuth.shouldBe(visible, Duration.ofSeconds(15));
+
     }
 
     public void rusAuth(DataHelper.AuthInfo getRussianName){
@@ -53,6 +52,6 @@ public class Pay {
         name.setValue(getRussianName.getName());
         cvv.setValue(getRussianName.getCvv());
         button.click();
-        errorAuth.shouldBe(visible, Duration.ofSeconds(15));
+
     }
 }
