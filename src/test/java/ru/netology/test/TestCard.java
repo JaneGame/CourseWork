@@ -28,52 +28,49 @@ public class TestCard {
         SelenideLogger.removeListener("allure");
     }
 
-    private SelenideElement goodAuth = $(withText("Операция одобрена"));
-    private SelenideElement errorAuth = $(withText("Ошибка"));
-
     @Test
     public void approvedTest() {
         var login = open("http://localhost:8080", StartPage.class);
-        var authInfo = DataHelper.getApprovedAuthInfo();
-        var start = login.payStart();
-        start.goodAuth(authInfo);
-        goodAuth.shouldBe(visible, Duration.ofSeconds(15));
+        var fillInfo = DataHelper.getApprovedInfo();
+        var start = login.goToDebitCardPay();
+        start.fillValidForm(fillInfo);
+        start.goGoodInfo();
     }
 
     @Test
     public void declinedTest() {
         var login = open("http://localhost:8080", StartPage.class);
-        var authInfo = DataHelper.getDeclinedAuthInfo();
-        var start = login.payStart();
-        start.blockedAuth(authInfo);
-        errorAuth.shouldBe(visible, Duration.ofSeconds(15));
+        var fillInfo = DataHelper.getDeclinedInfo();
+        var start = login.goToDebitCardPay();
+        start.fillInvalidForm(fillInfo);
+        start.goErrorInfo();
     }
 
     @Test
     public void rusTest() {
         var login = open("http://localhost:8080", StartPage.class);
-        var authInfo = DataHelper.getRussianName();
-        var start = login.payStart();
-        start.rusAuth(authInfo);
-        errorAuth.shouldBe(visible, Duration.ofSeconds(15));
+        var fillInfo = DataHelper.getRussianName();
+        var start = login.goToDebitCardPay();
+        start.fillRusForm(fillInfo);
+        start.goErrorInfo();
     }
 
     @Test
     public void noCardTest() {
         var login = open("http://localhost:8080", StartPage.class);
-        var authInfo = DataHelper.getNoCardName();
-        var start = login.payStart();
-        start.blockedAuth(authInfo);
-        errorAuth.shouldBe(visible, Duration.ofSeconds(15));
+        var fillInfo = DataHelper.getNoCardName();
+        var start = login.goToDebitCardPay();
+        start.fillInvalidForm(fillInfo);
+        start.goErrorInfo();
     }
 
     @Test
     public void creditTest() {
         var login = open("http://localhost:8080", StartPage.class);
-        var authInfo = DataHelper.getApprovedAuthInfo();
-        var start = login.creditStart();
-        start.goodAuth(authInfo);
-        goodAuth.shouldBe(visible, Duration.ofSeconds(15));
+        var fillInfo = DataHelper.getApprovedInfo();
+        var start = login.goToCreditCardPay();
+        start.fillValidForm(fillInfo);
+        start.goGoodInfo();
 
     }
 

@@ -14,13 +14,13 @@ public class StartPage {
     private SelenideElement startcredit = $(byText("Купить в кредит"));
     private SelenideElement credit = $(byText("Кредит по данным карты"));
 
-    public Pay payStart(){
+    public Pay goToDebitCardPay(){
         start.click();
         pay.shouldBe(visible);
         return new Pay();
     }
 
-    public Pay creditStart(){
+    public Pay goToCreditCardPay(){
         startcredit.click();
         credit.shouldBe(visible);
         return new Pay();
